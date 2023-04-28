@@ -8,16 +8,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MovieRepository {
 
-    HashMap<String, Movie> movieMap;
-    HashMap<String, Director> directorMap;
-    HashMap<String, List<String>> movieDirectorPairMap;
+    HashMap<String, Movie> movieMap = new HashMap<>();;
+    HashMap<String, Director> directorMap = new HashMap<>();
+    HashMap<String, List<String>> movieDirectorPairMap = new HashMap<>();
 
-    public MovieRepository() {
-        this.movieMap = new HashMap<>();
-        this.directorMap = new HashMap<>();
-        this.movieDirectorPairMap = new HashMap<>();
+    // public MovieRepository() {
+    //     this.movieMap = new HashMap<>();
+    //     this.directorMap = new HashMap<>();
+    //     this.movieDirectorPairMap = new HashMap<>();
 
-    }
+    // }
 
     public void movieAdd(Movie movie) {
         movieMap.put(movie.getName(), movie);
