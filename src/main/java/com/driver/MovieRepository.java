@@ -3,7 +3,6 @@ package com.driver;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -59,12 +58,24 @@ public class MovieRepository {
         return allMovie;
     }
 
-    public List<String> allMoviesFind(String director) {
+    public List<String> allMoviesFind() {
         return new ArrayList<>(movieMap.keySet());
     }
 
-    public void deleteDirector_By_Name(String name) {
+    public void removeDirector(String name) {
+        movieDirectorPairMap.remove(name);
         directorMap.remove(name);
+    }
+
+    public void removeMovie(String movieName) {
+        movieMap.remove(movieName);
+    }
+
+    public void deleteAllDirector() {
+    }
+
+    public List<String> getAllDirector() {
+        return new ArrayList<>(directorMap.keySet());
     }
 
 }

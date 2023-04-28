@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-@RestController()
+@RestController
 @RequestMapping("/movies")
 public class MovieController {
 
@@ -32,12 +32,11 @@ public class MovieController {
     @PostMapping("add-director")
     public ResponseEntity<String> addDirector(@RequestBody Director director) {
         movieService.directorAdded(director);
-        return new ResponseEntity<String>("Movie added successfully", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Director added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/add-movie-director-pair")
-    public ResponseEntity<String> addMovieDirectorPair(@RequestParam String movieName,
-            @RequestParam String directorName) {
+    public ResponseEntity<String> addMovieDirectorPair(@RequestParam String movieName, @RequestParam String directorName) {
         movieService.movieDirectorPairAdded(movieName, directorName);
         return new ResponseEntity<>("Movie director pair added successfully", HttpStatus.CREATED);
     }
@@ -61,8 +60,8 @@ public class MovieController {
     }
 
     @GetMapping("/get-all-movies")
-    public ResponseEntity<List<String>> findAllMovies(@PathVariable String director) {
-        List<String> list = movieService.findMoviesAll(director);
+    public ResponseEntity<List<String>> findAllMovies() {
+        List<String> list = movieService.findMoviesAll();
         return new ResponseEntity<List<String>>(list, HttpStatus.OK);
     }
 

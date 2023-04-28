@@ -6,7 +6,6 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class MovieService {
 
@@ -22,8 +21,9 @@ public class MovieService {
     }
 
     public void movieDirectorPairAdded(String movieName, String directorName) {
-        if (Objects.nonNull(movieRepository.findMovie(movieName))) {
-
+        if (Objects.nonNull(movieRepository.findMovie(movieName))
+                && Objects.nonNull(movieRepository.findDirector(directorName))) {
+            movieRepository.movieDirectorPairAdd(movieName, directorName);
         }
         movieRepository.movieDirectorPairAdd(movieName, directorName);
     }
@@ -40,15 +40,23 @@ public class MovieService {
         return movieRepository.moviesFromDirectorFind(director);
     }
 
-    public List<String> findMoviesAll(String director) {
-        return movieRepository.allMoviesFind(director);
+    public List<String> findMoviesAll() {
+        return movieRepository.allMoviesFind();
     }
 
     public void deleteDirector_ByName(String name) {
-        movieRepository.deleteDirector_By_Name(name);
+        List<String> moviesToDelete = movieRepository.moviesFromDirectorFind(name);
+        movieRepository.removeDirector(name);
+        for (String movieName : moviesToDelete) {
+            movieRepository.removeMovie(movieName);
+        }
     }
 
     public void allDeleteDirector() {
+        List<String> director = movieRepository.getAllDirector();
+        for (String directorName : director) {
+            deleteDirector_ByName(directorName);
+        }
     }
 
 }
