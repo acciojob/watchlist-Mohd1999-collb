@@ -12,7 +12,7 @@ public class MovieRepository {
     HashMap<String, Director> directorMap;
     HashMap<String, List<String>> movieDirectorPairMap;
 
-    public MovieRepository(){
+    public MovieRepository() {
         this.movieMap = new HashMap<>();
         this.directorMap = new HashMap<>();
         this.movieDirectorPairMap = new HashMap<>();
@@ -28,18 +28,18 @@ public class MovieRepository {
     }
 
     public void movieDirectorPairAdd(String movieName, String directorName) {
-        // List<String> pair = new ArrayList<>();
+        List<String> pair = new ArrayList<>();
+        if (movieDirectorPairMap.containsKey(directorName)) {
+            pair = movieDirectorPairMap.get(directorName);
+        }
+        pair.add(movieName);
+        movieDirectorPairMap.put(directorName, pair);
+
         // if (movieDirectorPairMap.containsKey(directorName)) {
-        // pair = movieDirectorPairMap.get(directorName);
-        // }
+        // List<String> pair = movieDirectorPairMap.get(directorName);
         // pair.add(movieName);
         // movieDirectorPairMap.put(directorName, pair);
-
-        if (movieDirectorPairMap.containsKey(directorName)) {
-            List<String> pair = movieDirectorPairMap.get(directorName);
-            pair.add(movieName);
-            movieDirectorPairMap.put(directorName, pair);
-        }
+        // }
     }
 
     public Movie findMovie(String movieName) {
